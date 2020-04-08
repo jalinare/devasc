@@ -1,16 +1,17 @@
 import re
 
+
 class ConfigurationParser:
 
-    deviceConfig = ''
+    def __init__(self):
+        self.deviceConfig = ''
+        self.readConfig('config.cfg')
 
-    def readConfig():
-        with open('config.cfg', 'r') as config_file:
-            deviceConfig = config_file.read()
-    #deviceConfig = open('config.cfg', 'r').read()
+    def readConfig(self, stream):
+        with open(stream, 'r') as config_file:
+            self.deviceConfig = config_file.read()
 
-    @classmethod
     def parseCustomerNames(self):
         customerNamePattern = r'ip vrf ([a-zA-Z_]+)\n'
-        customerNames = re.findall(customerNamePattern, deviceConfig)
+        customerNames = re.findall(customerNamePattern, self.deviceConfig)
         return customerNames
